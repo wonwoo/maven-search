@@ -9,6 +9,7 @@ import ml.wonwoo.mavensearch.utils.Utils;
 import org.springframework.boot.jackson.JsonObjectDeserializer;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class DocsDeserializer extends JsonObjectDeserializer<Docs> {
@@ -33,6 +34,9 @@ public class DocsDeserializer extends JsonObjectDeserializer<Docs> {
   }
 
   private static List<String> toList(ArrayNode nodes) {
+    if (nodes == null) {
+      return Collections.emptyList();
+    }
     List<String> result = new ArrayList<>();
     for (JsonNode node : nodes) {
       result.add(node.asText());

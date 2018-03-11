@@ -20,10 +20,19 @@ public class MavenRepository {
   public Mono<Maven> select(String q, int row, int start) {
     return this.webClient
         .get()
-        .uri("/solrsearch/select?q={q}&rows={row}&wt=json&start={start}", q, row, start)
+        .uri("/solrsearch/select?q=\"{q}\"&rows={row}&wt=json&start={start}", q, row, start)
         .retrieve()
         .bodyToMono(Maven.class);
+  }
 
+  public Mono<Maven> versions(String g, String a, int row, int start) {
+    String url = String.format("/solrsearch/select?q=g:%s+AND+a:%s&rows=%s&wt=json&start=%s&core=gav",
+        g, a, row, start);
+    return this.webClient
+        .get()
+        .uri(url)
+        .retrieve()
+        .bodyToMono(Maven.class);
   }
 
 }

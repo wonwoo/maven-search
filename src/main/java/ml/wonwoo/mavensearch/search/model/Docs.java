@@ -21,13 +21,15 @@ public class Docs {
 
   private String timestamp;
 
-  private int versionCount;
+  private Integer versionCount;
 
   private List<String> text;
 
   private List<String> ec;
 
-  public Docs(String id, String groupId, String artifactId, String latestVersion, String repositoryId, String packaging, String timestamp, int versionCount, List<String> text, List<String> ec) {
+  public Docs(String id, String groupId, String artifactId,
+              String latestVersion, String repositoryId, String packaging,
+              String timestamp, Integer versionCount, List<String> text, List<String> ec) {
     this.id = id;
     this.groupId = groupId;
     this.artifactId = artifactId;
