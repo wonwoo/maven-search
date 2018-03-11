@@ -1,34 +1,44 @@
 package ml.wonwoo.mavensearch.search.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
-import java.time.Instant;
 import java.util.List;
 
+@JsonDeserialize(using = DocsDeserializer.class)
 public class Docs {
 
   private String id;
 
-  @JsonProperty("g")
-  private String graupId;
+  private String groupId;
 
-  @JsonProperty("a")
   private String artifactId;
 
   private String latestVersion;
 
   private String repositoryId;
 
-  @JsonProperty("p")
   private String packaging;
 
-  private Instant timestamp;
+  private String timestamp;
 
   private int versionCount;
 
   private List<String> text;
 
   private List<String> ec;
+
+  public Docs(String id, String groupId, String artifactId, String latestVersion, String repositoryId, String packaging, String timestamp, int versionCount, List<String> text, List<String> ec) {
+    this.id = id;
+    this.groupId = groupId;
+    this.artifactId = artifactId;
+    this.latestVersion = latestVersion;
+    this.repositoryId = repositoryId;
+    this.packaging = packaging;
+    this.timestamp = timestamp;
+    this.versionCount = versionCount;
+    this.text = text;
+    this.ec = ec;
+  }
 
   public String getId() {
     return id;
@@ -38,12 +48,12 @@ public class Docs {
     this.id = id;
   }
 
-  public String getGraupId() {
-    return graupId;
+  public String getGroupId() {
+    return groupId;
   }
 
-  public void setGraupId(String graupId) {
-    this.graupId = graupId;
+  public void setGroupId(String groupId) {
+    this.groupId = groupId;
   }
 
   public String getArtifactId() {
@@ -78,11 +88,11 @@ public class Docs {
     this.packaging = packaging;
   }
 
-  public Instant getTimestamp() {
+  public String getTimestamp() {
     return timestamp;
   }
 
-  public void setTimestamp(Instant timestamp) {
+  public void setTimestamp(String timestamp) {
     this.timestamp = timestamp;
   }
 
