@@ -7,7 +7,7 @@ import reactor.core.publisher.Mono;
 
 @Service
 public class MavenRepository {
-  //  /solrsearch/select?q=guice&rows=20&wt=json
+
   private static final String MAVEN_BASE_URL = "http://search.maven.org";
   private final WebClient webClient;
 
