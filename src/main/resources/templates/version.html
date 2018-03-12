@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Github Dashboard</title>
+  <title>Maven Search</title>
 
   <link data-th-href="@{/webjars/bulma/0.6.0/css/bulma.css}" rel="stylesheet">
   <link rel="stylesheet" data-th-href="@{/webjars/font-awesome/4.7.0/css/font-awesome.min.css}"/>
@@ -30,7 +30,7 @@
       </thead>
       <tbody>
       <tr data-th-each="entry : ${versions.response.docs}">
-        <td>[[${entry.groupId}]]</td>
+        <td><a data-th-href="@{|/xml?g=${entry.groupId}&a=${entry.artifactId}&v=${entry.version}|}">[[${entry.groupId}]]</a></td>
         <td>[[${entry.artifactId}]]</td>
         <td>[[${entry.version}]]</td>
         <td>[[${entry.timestamp}]]</td>
@@ -40,6 +40,7 @@
   </div>
 </section>
 <script>
+
   var timeagoInstance = timeago();
   var nodes = document.querySelectorAll('time');
   timeagoInstance.render(nodes, 'en_US');
