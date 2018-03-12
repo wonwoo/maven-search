@@ -2,11 +2,11 @@ package ml.wonwoo.mavensearch.search.model;
 
 import java.util.List;
 
-public class Response {
+public class Response<T> {
 
   private int numFound;
   private int start;
-  private List<Docs> docs;
+  private List<T> docs;
 
   public int getNumFound() {
     return numFound;
@@ -24,11 +24,12 @@ public class Response {
     this.start = start;
   }
 
-  public List<Docs> getDocs() {
+
+  public List<T> getDocs() {
     return docs;
   }
 
-  public void setDocs(List<Docs> docs) {
+  public void setDocs(List<T> docs) {
     this.docs = docs;
   }
 }

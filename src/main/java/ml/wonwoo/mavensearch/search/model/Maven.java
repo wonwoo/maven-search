@@ -1,8 +1,8 @@
 package ml.wonwoo.mavensearch.search.model;
 
-public class Maven {
+public class Maven<T> {
   private ResponseHeader responseHeader;
-  private Response response;
+  private Response<T> response;
 
   public ResponseHeader getResponseHeader() {
     return responseHeader;
@@ -12,11 +12,11 @@ public class Maven {
     this.responseHeader = responseHeader;
   }
 
-  public Response getResponse() {
+  public Response<T> getResponse() {
     return response;
   }
 
-  public void setResponse(Response response) {
+  public void setResponse(Response<T> response) {
     this.response = response;
   }
 }

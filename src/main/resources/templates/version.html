@@ -25,12 +25,14 @@
       <thead>
       <th>GroupId</th>
       <th>ArtifactId</th>
+      <th>version</th>
       <th>Timestamp</th>
       </thead>
       <tbody>
       <tr data-th-each="entry : ${versions.response.docs}">
         <td>[[${entry.groupId}]]</td>
         <td>[[${entry.artifactId}]]</td>
+        <td>[[${entry.version}]]</td>
         <td>[[${entry.timestamp}]]</td>
       </tbody>
       </tr>

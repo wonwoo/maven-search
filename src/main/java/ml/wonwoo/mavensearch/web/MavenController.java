@@ -1,15 +1,11 @@
 package ml.wonwoo.mavensearch.web;
 
-import ml.wonwoo.mavensearch.search.MavenRepository;
-import ml.wonwoo.mavensearch.search.model.Maven;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.reactive.result.view.Rendering;
-import reactor.core.publisher.Mono;
+
+import ml.wonwoo.mavensearch.search.MavenRepository;
 
 @Controller
 public class MavenController {
@@ -21,9 +17,9 @@ public class MavenController {
   }
 
   @GetMapping("/")
-  public Rendering search(@RequestParam(value = "q", defaultValue = "") String q,
-                          @RequestParam(value = "row", defaultValue = "20") int row,
-                          @RequestParam(value = "start", defaultValue = "0") int start) {
+  public Rendering search(@RequestParam(defaultValue = "") String q,
+                          @RequestParam(defaultValue = "20") int row,
+                          @RequestParam(defaultValue = "0") int start) {
     return Rendering
         .view("home")
         .modelAttribute("maven", this.mavenRepository.select(q, row, start))
@@ -31,10 +27,9 @@ public class MavenController {
   }
 
   @GetMapping("/versions")
-  public Rendering versions(@RequestParam(value = "g") String g,
-                            @RequestParam(value = "a") String a,
-                            @RequestParam(value = "row", defaultValue = "20") int row,
-                            @RequestParam(value = "start", defaultValue = "0") int start) {
+  public Rendering versions(@RequestParam String g, @RequestParam String a,
+                            @RequestParam(defaultValue = "20") int row,
+                            @RequestParam(defaultValue = "0") int start) {
     return Rendering
         .view("version")
         .modelAttribute("versions",

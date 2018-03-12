@@ -1,8 +1,12 @@
 package ml.wonwoo.mavensearch.search;
 
-import ml.wonwoo.mavensearch.search.model.Maven;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
+
+import ml.wonwoo.mavensearch.search.model.Docs;
+import ml.wonwoo.mavensearch.search.model.Maven;
+import ml.wonwoo.mavensearch.search.model.VersionDocs;
 import reactor.core.publisher.Mono;
 
 @Service
@@ -17,22 +21,22 @@ public class MavenRepository {
         .build();
   }
 
-  public Mono<Maven> select(String q, int row, int start) {
+  public Mono<Maven<Docs>> select(String q, int row, int start) {
     return this.webClient
-        .get()
-        .uri("/solrsearch/select?q=\"{q}\"&rows={row}&wt=json&start={start}", q, row, start)
-        .retrieve()
-        .bodyToMono(Maven.class);
+            .get()
+            .uri("/solrsearch/select?q=\"{q}\"&rows={row}&wt=json&start={start}", q, row, start)
+            .retrieve()
+            .bodyToMono(new ParameterizedTypeReference<Maven<Docs>>() {});
   }
 
-  public Mono<Maven> versions(String g, String a, int row, int start) {
+  public Mono<Maven<VersionDocs>> versions(String g, String a, int row, int start) {
     String url = String.format("/solrsearch/select?q=g:%s+AND+a:%s&rows=%s&wt=json&start=%s&core=gav",
         g, a, row, start);
     return this.webClient
         .get()
         .uri(url)
         .retrieve()
-        .bodyToMono(Maven.class);
+        .bodyToMono(new ParameterizedTypeReference<Maven<VersionDocs>>() {});
   }
 
 }
