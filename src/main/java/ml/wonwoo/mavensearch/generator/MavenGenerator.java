@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
 @Service
-public class MavenXmlGenerator implements Generator {
+public class MavenGenerator implements Generator {
 
     @Override
     public Mono<String> generator(String groupId, String artifactId, String version) {

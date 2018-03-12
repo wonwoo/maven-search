@@ -12,11 +12,11 @@ import ml.wonwoo.mavensearch.search.MavenRepository;
 public class MavenController {
 
   private final MavenRepository mavenRepository;
-  private final Generator mavenXmlGenerator;
+  private final Generator mavenGenerator;
 
-  public MavenController(MavenRepository mavenRepository, Generator mavenXmlGenerator) {
+  public MavenController(MavenRepository mavenRepository, Generator mavenGenerator) {
     this.mavenRepository = mavenRepository;
-    this.mavenXmlGenerator = mavenXmlGenerator;
+    this.mavenGenerator = mavenGenerator;
   }
 
   @GetMapping("/")
@@ -44,7 +44,7 @@ public class MavenController {
   public Rendering xml(@RequestParam String g, @RequestParam String a, @RequestParam String v) {
     return Rendering
             .view("xml")
-            .modelAttribute("xml", mavenXmlGenerator.generator(g, a, v))
+            .modelAttribute("xml", mavenGenerator.generator(g, a, v))
             .build();
   }
 }
