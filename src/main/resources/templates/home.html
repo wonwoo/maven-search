@@ -8,6 +8,10 @@
   <link data-th-href="@{/webjars/bulma/0.6.0/css/bulma.css}" rel="stylesheet">
   <link rel="stylesheet" data-th-href="@{/webjars/font-awesome/4.7.0/css/font-awesome.min.css}"/>
   <script data-th-src="@{/webjars/timeago.js/3.0.0/dist/timeago.js}"></script>
+  <style>
+
+  </style>
+
 </head>
 <body>
 <section class="hero is-primary is-bold">
@@ -18,23 +22,27 @@
       </h1>
     </div>
   </div>
-</section><div class="field">
+</section>
 <section class="section">
-  <div class="field">
-    <div class="control">
-      <input class="input" type="text" name="q" id="q" placeholder="">
+  <div class="container">
+    <div class="field">
+      <div class="control">
+        <input class="input" type="text" name="q" id="q" placeholder="">
+      </div>
     </div>
-    <div class="control">
-      <button data-th-onclick="'javascript:search()'" class="button is-primary is-outlined">SEARCH</button>
+    <div class="field">
+      <div class="control level-right">
+        <button data-th-onclick="'javascript:search()'" class="button is-primary is-outlined">SEARCH</button>
+      </div>
     </div>
   </div>
   <div class="container" data-if-if="${!maven.response.docs.empty()}">
     <table class="table is-hoverable is-fullwidth">
       <thead>
-      <th>GroupId</th>
-      <th>ArtifactId</th>
-      <th>LatestVersion</th>
-      <th>Timestamp</th>
+        <th>GroupId</th>
+        <th>ArtifactId</th>
+        <th>LatestVersion</th>
+        <th>Timestamp</th>
       </thead>
       <tbody>
       <tr data-th-each="entry : ${maven.response.docs}">
@@ -42,8 +50,8 @@
         <td>[[${entry.artifactId}]]</td>
         <td>[[${entry.latestVersion}]]</td>
         <td>[[${entry.timestamp}]]</td>
-      </tbody>
       </tr>
+      </tbody>
     </table>
   </div>
 </section>
