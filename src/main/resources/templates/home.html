@@ -60,6 +60,15 @@
     var q = document.getElementById("q").value;
     location.href = "/?q=" + q;
   }
+
+  document.getElementById("q")
+    .addEventListener("keyup", function(event) {
+        event.preventDefault();
+        if (event.keyCode === 13) {
+            search()
+        }
+    });
+
   var timeagoInstance = timeago();
   var nodes = document.querySelectorAll('time');
   timeagoInstance.render(nodes, 'en_US');
