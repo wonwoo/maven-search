@@ -3,19 +3,29 @@
 <head>
     <meta charset="utf-8">
     <title>Maven Search</title>
+    <link rel="stylesheet" data-th-href="@{/webjars/codemirror/5.33.0/lib/codemirror.css}"/>
+    <script data-th-src="@{/webjars/codemirror/5.33.0/lib/codemirror.js}"></script>
+    <script data-th-src="@{/webjars/codemirror/5.33.0/mode/xml/xml.js}"></script>
 </head>
 <body>
     <div layout:fragment="content">
         <section class="section">
             <div class="container">
                 <h2 class="title">Maven</h2>
-                <textarea onclick="btnClick(this);" class="textarea" rows="5">[[${xml}]]</textarea>
+                <textarea onclick="btnClick(this)" class="textarea" id="xml" rows="5" data-th-utext="${xml}"></textarea>
             </div>
         </section>
         <script>
             function btnClick (obj) {
+                alert()
                 obj.select();
             }
+            var readOnlyCodeMirror = CodeMirror.fromTextArea(document.getElementById("xml"), {
+                mode: "application/xml",
+                lineNumbers: true,
+                readOnly: true
+            });
+            readOnlyCodeMirror.setSize(500, 130);
         </script>
     </div>
 </body>
