@@ -1,8 +1,8 @@
 package ml.wonwoo.mavensearch.search.model;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-
 import java.util.List;
+
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 @JsonDeserialize(using = DocsDeserializer.class)
 public class Docs {
@@ -19,7 +19,9 @@ public class Docs {
 
   private String packaging;
 
-  private String timestamp;
+  private String dateTime;
+
+  private Long timestamp;
 
   private Integer versionCount;
 
@@ -29,13 +31,14 @@ public class Docs {
 
   public Docs(String id, String groupId, String artifactId,
               String latestVersion, String repositoryId, String packaging,
-              String timestamp, Integer versionCount, List<String> text, List<String> ec) {
+              String dateTime, Long timestamp, Integer versionCount, List<String> text, List<String> ec) {
     this.id = id;
     this.groupId = groupId;
     this.artifactId = artifactId;
     this.latestVersion = latestVersion;
     this.repositoryId = repositoryId;
     this.packaging = packaging;
+    this.dateTime = dateTime;
     this.timestamp = timestamp;
     this.versionCount = versionCount;
     this.text = text;
@@ -90,12 +93,19 @@ public class Docs {
     this.packaging = packaging;
   }
 
-  public String getTimestamp() {
+  public Long getTimestamp() {
     return timestamp;
   }
 
-  public void setTimestamp(String timestamp) {
+  public void setTimestamp(Long timestamp) {
     this.timestamp = timestamp;
+  }
+  public String getDateTime() {
+    return this.dateTime;
+  }
+
+  public void setDateTime(String dateTime) {
+    this.dateTime = dateTime;
   }
 
   public int getVersionCount() {

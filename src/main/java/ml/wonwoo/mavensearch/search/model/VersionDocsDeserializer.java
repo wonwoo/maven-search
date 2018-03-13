@@ -32,7 +32,7 @@ public class VersionDocsDeserializer extends JsonObjectDeserializer<VersionDocs>
     List<String> text = toList((ArrayNode) jsonNode.get("text"));
     List<String> tags = toList((ArrayNode) jsonNode.get("tags"));
     return new VersionDocs(id, groupId, artifactId, latestVersion, repositoryId,
-        packaging, Utils.formatToEnglish(timestamp), version, text, tags);
+        packaging, Utils.formatToEnglish(timestamp), timestamp, version, text, tags);
   }
 
   private static List<String> toList(ArrayNode nodes) {

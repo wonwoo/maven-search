@@ -8,6 +8,7 @@
 
     <link data-th-href="@{/webjars/bulma/0.6.0/css/bulma.css}" rel="stylesheet">
     <link rel="stylesheet" data-th-href="@{/webjars/font-awesome/4.7.0/css/font-awesome.min.css}"/>
+    <script data-th-src="@{/webjars/timeago.js/3.0.0/dist/timeago.js}"></script>
 </head>
 
 <body>
@@ -23,7 +24,6 @@
 <div class="container" layout:fragment="content">
 
 </div>
-
 <script>
     var timeagoInstance = timeago();
     var nodes = document.querySelectorAll('time');

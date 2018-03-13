@@ -19,7 +19,9 @@ public class VersionDocs {
 
     private String packaging;
 
-    private String timestamp;
+    private String dateTime;
+
+    private Long timestamp;
 
     private String version;
 
@@ -29,13 +31,14 @@ public class VersionDocs {
 
     public VersionDocs(String id, String groupId, String artifactId,
             String latestVersion, String repositoryId, String packaging,
-            String timestamp, String version, List<String> text, List<String> tags) {
+            String dateTime, Long timestamp, String version, List<String> text, List<String> tags) {
         this.id = id;
         this.groupId = groupId;
         this.artifactId = artifactId;
         this.latestVersion = latestVersion;
         this.repositoryId = repositoryId;
         this.packaging = packaging;
+        this.dateTime = dateTime;
         this.timestamp = timestamp;
         this.version = version;
         this.text = text;
@@ -90,11 +93,19 @@ public class VersionDocs {
         this.packaging = packaging;
     }
 
-    public String getTimestamp() {
+    public String getDateTime() {
+        return dateTime;
+    }
+
+    public void setDateTime(String dateTime) {
+        this.dateTime = dateTime;
+    }
+
+    public Long getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(String timestamp) {
+    public void setTimestamp(Long timestamp) {
         this.timestamp = timestamp;
     }
 

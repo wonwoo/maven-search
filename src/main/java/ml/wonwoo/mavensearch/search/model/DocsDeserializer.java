@@ -1,16 +1,18 @@
 package ml.wonwoo.mavensearch.search.model;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+import org.springframework.boot.jackson.JsonObjectDeserializer;
+
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.ObjectCodec;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
-import ml.wonwoo.mavensearch.utils.Utils;
-import org.springframework.boot.jackson.JsonObjectDeserializer;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import ml.wonwoo.mavensearch.utils.Utils;
 
 public class DocsDeserializer extends JsonObjectDeserializer<Docs> {
 
@@ -30,7 +32,7 @@ public class DocsDeserializer extends JsonObjectDeserializer<Docs> {
     List<String> text = toList((ArrayNode) jsonNode.get("text"));
     List<String> ec = toList((ArrayNode) jsonNode.get("ec"));
     return new Docs(id, groupId, artifactId, latestVersion, repositoryId,
-        packaging, Utils.formatToEnglish(timestamp), versionCount, text, ec);
+        packaging, Utils.formatToEnglish(timestamp), timestamp, versionCount, text, ec);
   }
 
   private static List<String> toList(ArrayNode nodes) {

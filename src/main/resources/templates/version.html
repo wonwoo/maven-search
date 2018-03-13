@@ -13,6 +13,7 @@
         <th>GroupId</th>
         <th>ArtifactId</th>
         <th>version</th>
+        <th>dateTime</th>
         <th>Timestamp</th>
         </thead>
         <tbody>
@@ -20,9 +21,12 @@
           <td><a data-th-href="@{|/xml?g=${entry.groupId}&a=${entry.artifactId}&v=${entry.version}|}">[[${entry.groupId}]]</a></td>
           <td>[[${entry.artifactId}]]</td>
           <td>[[${entry.version}]]</td>
-          <td>[[${entry.timestamp}]]</td>
-        </tbody>
+          <td>[[${entry.dateTime}]]</td>
+          <td>
+            <time data-th-attr="datetime=${entry.timestamp}">[[${entry.timestamp}]]</time>
+          </td>
         </tr>
+        </tbody>
       </table>
     </div>
   </section>

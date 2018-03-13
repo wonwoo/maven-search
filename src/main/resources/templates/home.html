@@ -25,6 +25,7 @@
         <th>GroupId</th>
         <th>ArtifactId</th>
         <th>LatestVersion</th>
+        <th>Time</th>
         <th>Timestamp</th>
         </thead>
         <tbody>
@@ -32,7 +33,10 @@
           <td><a data-th-href="@{|/versions?g=${entry.groupId}&a=${entry.artifactId}|}">[[${entry.groupId}]]</a></td>
           <td>[[${entry.artifactId}]]</td>
           <td>[[${entry.latestVersion}]]</td>
-          <td>[[${entry.timestamp}]]</td>
+          <td>[[${entry.dateTime}]]</td>
+          <td>
+              <time data-th-attr="datetime=${entry.timestamp}">[[${entry.timestamp}]]</time>
+          </td>
         </tr>
         </tbody>
       </table>
