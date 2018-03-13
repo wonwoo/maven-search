@@ -2,7 +2,7 @@ package ml.wonwoo.mavensearch.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.reactive.result.view.Rendering;
 
 import ml.wonwoo.mavensearch.generator.Generator;
@@ -20,31 +20,31 @@ public class MavenController {
   }
 
   @GetMapping("/")
-  public Rendering search(@RequestParam(defaultValue = "") String q,
-                          @RequestParam(defaultValue = "20") int row,
-                          @RequestParam(defaultValue = "0") int start) {
+  public Rendering search(@ModelAttribute SearchRequest request) {
     return Rendering
         .view("home")
-        .modelAttribute("maven", this.mavenRepository.select(q, row, start))
+        .modelAttribute("maven", this.mavenRepository.select(request.getQ(),
+                request.getRow(), request.getStart()))
+        .modelAttribute("request", request)
         .build();
   }
 
   @GetMapping("/versions")
-  public Rendering versions(@RequestParam String g, @RequestParam String a,
-                            @RequestParam(defaultValue = "20") int row,
-                            @RequestParam(defaultValue = "0") int start) {
+  public Rendering versions(@ModelAttribute VersionRequest request) {
     return Rendering
         .view("version")
         .modelAttribute("versions",
-            this.mavenRepository.versions(g, a, row, start))
+            this.mavenRepository.versions(request.getG(), request.getA(),
+                    request.getRow(), request.getStart()))
         .build();
   }
 
-  @GetMapping("/xml")
-  public Rendering xml(@RequestParam String g, @RequestParam String a, @RequestParam String v) {
+  @GetMapping("/maven")
+  public Rendering xml(@ModelAttribute VersionRequest request) {
     return Rendering
-            .view("xml")
-            .modelAttribute("xml", mavenGenerator.generator(g, a, v))
+            .view("maven")
+            .modelAttribute("maven", mavenGenerator.generator(request.getG(),
+                    request.getA(), request.getV()))
             .build();
   }
 }
