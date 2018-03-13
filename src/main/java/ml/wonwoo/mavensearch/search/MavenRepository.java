@@ -1,5 +1,6 @@
 package ml.wonwoo.mavensearch.search;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -21,6 +22,7 @@ public class MavenRepository {
         .build();
   }
 
+  @Cacheable("select")
   public Mono<Maven<Docs>> select(String q, int row, int start) {
     return this.webClient
             .get()
@@ -29,6 +31,7 @@ public class MavenRepository {
             .bodyToMono(new ParameterizedTypeReference<Maven<Docs>>() {});
   }
 
+  @Cacheable("versions")
   public Mono<Maven<VersionDocs>> versions(String g, String a, int row, int start) {
     String url = String.format("/solrsearch/select?q=g:%s+AND+a:%s&rows=%s&wt=json&start=%s&core=gav",
         g, a, row, start);

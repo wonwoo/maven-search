@@ -18,7 +18,7 @@
         </thead>
         <tbody>
         <tr data-th-each="entry : ${versions.response.docs}">
-          <td><a data-th-href="@{|/xml?g=${entry.groupId}&a=${entry.artifactId}&v=${entry.version}|}">[[${entry.groupId}]]</a></td>
+          <td><a data-th-href="@{|/maven?g=${entry.groupId}&a=${entry.artifactId}&v=${entry.version}|}">[[${entry.groupId}]]</a></td>
           <td>[[${entry.artifactId}]]</td>
           <td>[[${entry.version}]]</td>
           <td>[[${entry.dateTime}]]</td>
