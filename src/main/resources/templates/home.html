@@ -1,77 +1,56 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Maven Search</title>
-
-  <link data-th-href="@{/webjars/bulma/0.6.0/css/bulma.css}" rel="stylesheet">
-  <link rel="stylesheet" data-th-href="@{/webjars/font-awesome/4.7.0/css/font-awesome.min.css}"/>
-  <script data-th-src="@{/webjars/timeago.js/3.0.0/dist/timeago.js}"></script>
-  <style>
-
-  </style>
-
 </head>
 <body>
-<section class="hero is-primary is-bold">
-  <div class="hero-body">
+<div layout:fragment="content">
+  <section class="section">
     <div class="container">
-      <h1 class="title">
-        <i class="fa fa-github-square" aria-hidden="true"></i>&nbsp;Maven Search
-      </h1>
-    </div>
-  </div>
-</section>
-<section class="section">
-  <div class="container">
-    <div class="field">
-      <div class="control">
-        <input class="input" type="text" name="q" id="q" placeholder="">
+      <div class="field">
+        <div class="control">
+          <input class="input" type="text" name="q" id="q" placeholder="">
+        </div>
+      </div>
+      <div class="field">
+        <div class="control level-right">
+          <button data-th-onclick="'javascript:search()'" class="button is-primary is-outlined">SEARCH</button>
+        </div>
       </div>
     </div>
-    <div class="field">
-      <div class="control level-right">
-        <button data-th-onclick="'javascript:search()'" class="button is-primary is-outlined">SEARCH</button>
-      </div>
-    </div>
-  </div>
-  <div class="container" data-if-if="${!maven.response.docs.empty()}">
-    <table class="table is-hoverable is-fullwidth">
-      <thead>
+    <div class="container" data-if-if="${!maven.response.docs.empty()}">
+      <table class="table is-hoverable is-fullwidth">
+        <thead>
         <th>GroupId</th>
         <th>ArtifactId</th>
         <th>LatestVersion</th>
         <th>Timestamp</th>
-      </thead>
-      <tbody>
-      <tr data-th-each="entry : ${maven.response.docs}">
-        <td><a data-th-href="@{|/versions?g=${entry.groupId}&a=${entry.artifactId}|}">[[${entry.groupId}]]</a></td>
-        <td>[[${entry.artifactId}]]</td>
-        <td>[[${entry.latestVersion}]]</td>
-        <td>[[${entry.timestamp}]]</td>
-      </tr>
-      </tbody>
-    </table>
-  </div>
-</section>
-<script>
-  function search() {
-    var q = document.getElementById("q").value;
-    location.href = "/?q=" + q;
-  }
-
-  document.getElementById("q")
-    .addEventListener("keyup", function(event) {
-        event.preventDefault();
-        if (event.keyCode === 13) {
-            search()
+        </thead>
+        <tbody>
+        <tr data-th-each="entry : ${maven.response.docs}">
+          <td><a data-th-href="@{|/versions?g=${entry.groupId}&a=${entry.artifactId}|}">[[${entry.groupId}]]</a></td>
+          <td>[[${entry.artifactId}]]</td>
+          <td>[[${entry.latestVersion}]]</td>
+          <td>[[${entry.timestamp}]]</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <script>
+        function search() {
+            var q = document.getElementById("q").value;
+            location.href = "/?q=" + q;
         }
-    });
-
-  var timeagoInstance = timeago();
-  var nodes = document.querySelectorAll('time');
-  timeagoInstance.render(nodes, 'en_US');
-</script>
+        document.getElementById("q")
+          .addEventListener("keyup", function(event) {
+              event.preventDefault();
+              if (event.keyCode === 13) {
+                  search();
+              }
+        });
+    </script>
+  </section>
+</div>
 </body>
 </html>

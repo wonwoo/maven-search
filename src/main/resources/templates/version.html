@@ -1,49 +1,31 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Maven Search</title>
-
-  <link data-th-href="@{/webjars/bulma/0.6.0/css/bulma.css}" rel="stylesheet">
-  <link rel="stylesheet" data-th-href="@{/webjars/font-awesome/4.7.0/css/font-awesome.min.css}"/>
-  <script data-th-src="@{/webjars/timeago.js/3.0.0/dist/timeago.js}"></script>
+  <title>Maven Search vvv</title>
 </head>
 <body>
-<section class="hero is-primary is-bold">
-  <div class="hero-body">
+<div layout:fragment="content">
+  <section class="section">
     <div class="container">
-      <h1 class="title">
-        <i class="fa fa-github-square" aria-hidden="true"></i>&nbsp;Maven Search
-      </h1>
+      <table class="table is-hoverable is-fullwidth">
+        <thead>
+        <th>GroupId</th>
+        <th>ArtifactId</th>
+        <th>version</th>
+        <th>Timestamp</th>
+        </thead>
+        <tbody>
+        <tr data-th-each="entry : ${versions.response.docs}">
+          <td><a data-th-href="@{|/xml?g=${entry.groupId}&a=${entry.artifactId}&v=${entry.version}|}">[[${entry.groupId}]]</a></td>
+          <td>[[${entry.artifactId}]]</td>
+          <td>[[${entry.version}]]</td>
+          <td>[[${entry.timestamp}]]</td>
+        </tbody>
+        </tr>
+      </table>
     </div>
-  </div>
-</section>
-<section class="section">
-  <div class="container">
-    <table class="table is-hoverable is-fullwidth">
-      <thead>
-      <th>GroupId</th>
-      <th>ArtifactId</th>
-      <th>version</th>
-      <th>Timestamp</th>
-      </thead>
-      <tbody>
-      <tr data-th-each="entry : ${versions.response.docs}">
-        <td><a data-th-href="@{|/xml?g=${entry.groupId}&a=${entry.artifactId}&v=${entry.version}|}">[[${entry.groupId}]]</a></td>
-        <td>[[${entry.artifactId}]]</td>
-        <td>[[${entry.version}]]</td>
-        <td>[[${entry.timestamp}]]</td>
-      </tbody>
-      </tr>
-    </table>
-  </div>
-</section>
-<script>
-
-  var timeagoInstance = timeago();
-  var nodes = document.querySelectorAll('time');
-  timeagoInstance.render(nodes, 'en_US');
-</script>
+  </section>
+</div>
 </body>
 </html>
