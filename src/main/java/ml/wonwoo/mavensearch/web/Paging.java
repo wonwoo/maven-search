@@ -27,6 +27,7 @@ public class Paging {
                     + "\" class=\"pagination-link\" aria-label=\"Goto page \">" + last
                     + "</a></li>";
         }
+        nav += "</ul>";
         return nav;
     }
 
@@ -52,6 +53,7 @@ public class Paging {
                     + "\" class=\"pagination-link\" aria-label=\"Goto page \">" + last
                     + "</a></li>";
         }
+        nav += "</ul>";
         return nav;
     }
 }
