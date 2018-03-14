@@ -11,13 +11,13 @@ import ml.wonwoo.mavensearch.search.model.VersionDocs;
 import reactor.core.publisher.Mono;
 
 @Service
-public class MavenRepository {
+public class MavenClient {
 
   private static final String MAVEN_BASE_URL = "http://search.maven.org";
   private final WebClient webClient;
   private final MeterRegistry meterRegistry;
 
-  public MavenRepository(WebClient.Builder builder, MeterRegistry meterRegistry) {
+  public MavenClient(WebClient.Builder builder, MeterRegistry meterRegistry) {
     this.webClient = builder
         .baseUrl(MAVEN_BASE_URL)
         .build();

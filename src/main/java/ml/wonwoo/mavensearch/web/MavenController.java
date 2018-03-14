@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.reactive.result.view.Rendering;
 
 import ml.wonwoo.mavensearch.generator.Generator;
-import ml.wonwoo.mavensearch.search.MavenRepository;
+import ml.wonwoo.mavensearch.search.MavenClient;
 import ml.wonwoo.mavensearch.search.model.Docs;
 import ml.wonwoo.mavensearch.search.model.Maven;
 import ml.wonwoo.mavensearch.search.model.VersionDocs;
@@ -15,19 +15,19 @@ import reactor.core.publisher.Mono;
 @Controller
 public class MavenController {
 
-  private final MavenRepository mavenRepository;
+  private final MavenClient mavenClient;
   private final Generator mavenGenerator;
   private final Paging paging;
 
-  public MavenController(MavenRepository mavenRepository, Generator mavenGenerator, Paging paging) {
-    this.mavenRepository = mavenRepository;
+  public MavenController(MavenClient mavenClient, Generator mavenGenerator, Paging paging) {
+    this.mavenClient = mavenClient;
     this.mavenGenerator = mavenGenerator;
     this.paging = paging;
   }
 
   @GetMapping("/")
   public Rendering search(@ModelAttribute SearchRequest request) {
-    Mono<Maven<Docs>> select = this.mavenRepository.select(request.getQ(),
+    Mono<Maven<Docs>> select = this.mavenClient.select(request.getQ(),
             request.getRow(), request.getStart());
     return Rendering
         .view("home")
@@ -42,7 +42,7 @@ public class MavenController {
 
   @GetMapping("/versions")
   public Rendering versions(@ModelAttribute VersionRequest request) {
-      Mono<Maven<VersionDocs>> versions = this.mavenRepository.versions(request.getG(), request.getA(),
+      Mono<Maven<VersionDocs>> versions = this.mavenClient.versions(request.getG(), request.getA(),
               request.getRow(), request.getStart());
       return Rendering
         .view("version")
