@@ -9,6 +9,7 @@ import ml.wonwoo.mavensearch.generator.Generator;
 import ml.wonwoo.mavensearch.search.MavenRepository;
 import ml.wonwoo.mavensearch.search.model.Docs;
 import ml.wonwoo.mavensearch.search.model.Maven;
+import ml.wonwoo.mavensearch.search.model.VersionDocs;
 import reactor.core.publisher.Mono;
 
 @Controller
@@ -32,20 +33,25 @@ public class MavenController {
         .view("home")
         .modelAttribute("maven", select)
         .modelAttribute("paging", select.map(docsMaven ->
-                paging.navigator(request.getRow(),
+                paging.search(request.getRow(),
                 request.getStart(),
-                docsMaven.getResponse().getNumFound())))
+                docsMaven.getResponse().getNumFound(), request.getQ())))
         .modelAttribute("request", request)
         .build();
   }
 
   @GetMapping("/versions")
   public Rendering versions(@ModelAttribute VersionRequest request) {
-    return Rendering
+      Mono<Maven<VersionDocs>> versions = this.mavenRepository.versions(request.getG(), request.getA(),
+              request.getRow(), request.getStart());
+      return Rendering
         .view("version")
         .modelAttribute("versions",
-            this.mavenRepository.versions(request.getG(), request.getA(),
-                    request.getRow(), request.getStart()))
+                versions)
+            .modelAttribute("paging", versions.map(docsMaven ->
+                    paging.versions(request.getRow(),
+                            request.getStart(),
+                            docsMaven.getResponse().getNumFound(), request.getG(), request.getA())))
         .build();
   }
 
