@@ -4,5 +4,5 @@ import reactor.core.publisher.Mono;
 
 public interface Generator {
 
-    Mono<String> generator(String groupId, String artifactId, String version);
+  Mono<String> generator(String groupId, String artifactId, String version);
 }

@@ -19,8 +19,8 @@ public class MavenClient {
 
   public MavenClient(WebClient.Builder builder, MeterRegistry meterRegistry) {
     this.webClient = builder
-        .baseUrl(MAVEN_BASE_URL)
-        .build();
+            .baseUrl(MAVEN_BASE_URL)
+            .build();
     this.meterRegistry = meterRegistry;
   }
 
@@ -35,11 +35,11 @@ public class MavenClient {
 
   public Mono<Maven<VersionDocs>> versions(String g, String a, int row, int start) {
     return this.webClient
-        .get()
-        .uri("/solrsearch/select?q=g:{g}+AND+a:{a}&rows={row}&wt=json&start={start}&core=gav", g, a ,row, start)
-        .retrieve()
-        .bodyToMono(new ParameterizedTypeReference<Maven<VersionDocs>>() {})
-        .doFinally(signalType -> increment("maven.versions"));
+            .get()
+            .uri("/solrsearch/select?q=g:{g}+AND+a:{a}&rows={row}&wt=json&start={start}&core=gav", g, a, row, start)
+            .retrieve()
+            .bodyToMono(new ParameterizedTypeReference<Maven<VersionDocs>>() {})
+            .doFinally(signalType -> increment("maven.versions"));
   }
 
   private void increment(String key) {

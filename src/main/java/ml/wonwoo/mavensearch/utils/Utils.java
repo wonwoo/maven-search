@@ -19,16 +19,16 @@ public abstract class Utils {
   }
 
   private static Map<Long, String> daysLookup =
-      IntStream.rangeClosed(1, 31).boxed()
-          .collect(Collectors.toMap(Integer::longValue, Utils::getOrdinal));
+          IntStream.rangeClosed(1, 31).boxed()
+                  .collect(Collectors.toMap(Integer::longValue, Utils::getOrdinal));
 
   private static DateTimeFormatter englishDateFormatter = new DateTimeFormatterBuilder()
-      .appendPattern("MMMM")
-      .appendLiteral(" ")
-      .appendText(ChronoField.DAY_OF_MONTH, daysLookup)
-      .appendLiteral(" ")
-      .appendPattern("yyyy")
-      .toFormatter(Locale.ENGLISH);
+          .appendPattern("MMMM")
+          .appendLiteral(" ")
+          .appendText(ChronoField.DAY_OF_MONTH, daysLookup)
+          .appendLiteral(" ")
+          .appendPattern("yyyy")
+          .toFormatter(Locale.ENGLISH);
 
   public static String formatToEnglish(TemporalAccessor temporal) {
     return englishDateFormatter.format(temporal);
@@ -41,9 +41,9 @@ public abstract class Utils {
 
   public static LocalDateTime longToDateTime(long value) {
     return Instant
-        .ofEpochMilli(value)
-        .atZone(ZoneId.systemDefault())
-        .toLocalDateTime();
+            .ofEpochMilli(value)
+            .atZone(ZoneId.systemDefault())
+            .toLocalDateTime();
   }
 
   private static String getOrdinal(int n) {

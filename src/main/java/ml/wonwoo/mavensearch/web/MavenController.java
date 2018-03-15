@@ -30,29 +30,29 @@ public class MavenController {
     Mono<Maven<Docs>> select = this.mavenClient.select(request.getQ(),
             request.getRow(), request.getStart());
     return Rendering
-        .view("home")
-        .modelAttribute("maven", select)
-        .modelAttribute("paging", select.map(docsMaven ->
-                paging.search(request.getRow(),
-                request.getStart(),
-                docsMaven.getResponse().getNumFound(), request.getQ())))
-        .modelAttribute("request", request)
-        .build();
+            .view("home")
+            .modelAttribute("maven", select)
+            .modelAttribute("paging", select.map(docsMaven ->
+                    paging.search(request.getRow(),
+                            request.getStart(),
+                            docsMaven.getResponse().getNumFound(), request.getQ())))
+            .modelAttribute("request", request)
+            .build();
   }
 
   @GetMapping("/versions")
   public Rendering versions(@ModelAttribute VersionRequest request) {
-      Mono<Maven<VersionDocs>> versions = this.mavenClient.versions(request.getG(), request.getA(),
-              request.getRow(), request.getStart());
-      return Rendering
-        .view("version")
-        .modelAttribute("versions",
-                versions)
+    Mono<Maven<VersionDocs>> versions = this.mavenClient.versions(request.getG(), request.getA(),
+            request.getRow(), request.getStart());
+    return Rendering
+            .view("version")
+            .modelAttribute("versions",
+                    versions)
             .modelAttribute("paging", versions.map(docsMaven ->
                     paging.versions(request.getRow(),
                             request.getStart(),
                             docsMaven.getResponse().getNumFound(), request.getG(), request.getA())))
-        .build();
+            .build();
   }
 
   @GetMapping("/maven")

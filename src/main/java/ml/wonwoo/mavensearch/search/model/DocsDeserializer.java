@@ -18,8 +18,8 @@ public class DocsDeserializer extends JsonObjectDeserializer<Docs> {
 
   @Override
   protected Docs deserializeObject(JsonParser jsonParser,
-                                   DeserializationContext context,
-                                   ObjectCodec codec, JsonNode jsonNode) {
+          DeserializationContext context,
+          ObjectCodec codec, JsonNode jsonNode) {
 
     String id = nullSafeValue(jsonNode.get("id"), String.class);
     String groupId = nullSafeValue(jsonNode.get("g"), String.class);
@@ -32,7 +32,7 @@ public class DocsDeserializer extends JsonObjectDeserializer<Docs> {
     List<String> text = toList((ArrayNode) jsonNode.get("text"));
     List<String> ec = toList((ArrayNode) jsonNode.get("ec"));
     return new Docs(id, groupId, artifactId, latestVersion, repositoryId,
-        packaging, Utils.formatToEnglish(timestamp), timestamp, versionCount, text, ec);
+            packaging, Utils.formatToEnglish(timestamp), timestamp, versionCount, text, ec);
   }
 
   private static List<String> toList(ArrayNode nodes) {

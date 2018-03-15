@@ -30,8 +30,8 @@ public class Docs {
   private List<String> ec;
 
   public Docs(String id, String groupId, String artifactId,
-              String latestVersion, String repositoryId, String packaging,
-              String dateTime, Long timestamp, Integer versionCount, List<String> text, List<String> ec) {
+          String latestVersion, String repositoryId, String packaging,
+          String dateTime, Long timestamp, Integer versionCount, List<String> text, List<String> ec) {
     this.id = id;
     this.groupId = groupId;
     this.artifactId = artifactId;
@@ -100,6 +100,7 @@ public class Docs {
   public void setTimestamp(Long timestamp) {
     this.timestamp = timestamp;
   }
+
   public String getDateTime() {
     return this.dateTime;
   }
