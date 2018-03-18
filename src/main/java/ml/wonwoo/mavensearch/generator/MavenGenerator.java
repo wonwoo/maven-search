@@ -10,19 +10,19 @@ public class MavenGenerator implements Generator {
   @Override
   public Mono<String> generator(String groupId, String artifactId, String version) {
     return Mono.just("<dependency>"
-            + "\n\t"
-            + "<groupId>"
-            + groupId
-            + "</groupId>"
-            + "\n\t"
-            + "<artifactId>"
-            + artifactId
-            + "</artifactId>"
-            + "\n\t"
-            + "<version>"
-            + version
-            + "</version>"
-            + "\n"
-            + "</dependency>");
+        + "\n\t"
+        + "<groupId>"
+        + groupId
+        + "</groupId>"
+        + "\n\t"
+        + "<artifactId>"
+        + artifactId
+        + "</artifactId>"
+        + "\n\t"
+        + "<version>"
+        + version
+        + "</version>"
+        + "\n"
+        + "</dependency>");
   }
 }

@@ -30,8 +30,8 @@ public class VersionDocs {
   private List<String> tags;
 
   public VersionDocs(String id, String groupId, String artifactId,
-          String latestVersion, String repositoryId, String packaging,
-          String dateTime, Long timestamp, String version, List<String> text, List<String> tags) {
+                     String latestVersion, String repositoryId, String packaging,
+                     String dateTime, Long timestamp, String version, List<String> text, List<String> tags) {
     this.id = id;
     this.groupId = groupId;
     this.artifactId = artifactId;

@@ -18,8 +18,8 @@ public class VersionDocsDeserializer extends JsonObjectDeserializer<VersionDocs>
 
   @Override
   protected VersionDocs deserializeObject(JsonParser jsonParser,
-          DeserializationContext context,
-          ObjectCodec codec, JsonNode jsonNode) {
+                                          DeserializationContext context,
+                                          ObjectCodec codec, JsonNode jsonNode) {
 
     String id = nullSafeValue(jsonNode.get("id"), String.class);
     String groupId = nullSafeValue(jsonNode.get("g"), String.class);
@@ -32,7 +32,7 @@ public class VersionDocsDeserializer extends JsonObjectDeserializer<VersionDocs>
     List<String> text = toList((ArrayNode) jsonNode.get("text"));
     List<String> tags = toList((ArrayNode) jsonNode.get("tags"));
     return new VersionDocs(id, groupId, artifactId, latestVersion, repositoryId,
-            packaging, Utils.formatToEnglish(timestamp), timestamp, version, text, tags);
+        packaging, Utils.formatToEnglish(timestamp), timestamp, version, text, tags);
   }
 
   private static List<String> toList(ArrayNode nodes) {

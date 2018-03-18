@@ -28,39 +28,39 @@ public class MavenController {
   @GetMapping("/")
   public Rendering search(@ModelAttribute SearchRequest request) {
     Mono<Maven<Docs>> select = this.mavenClient.select(request.getQ(),
-            request.getRow(), request.getStart());
+        request.getRow(), request.getStart());
     return Rendering
-            .view("home")
-            .modelAttribute("maven", select)
-            .modelAttribute("paging", select.map(docsMaven ->
-                    paging.search(request.getRow(),
-                            request.getStart(),
-                            docsMaven.getResponse().getNumFound(), request.getQ())))
-            .modelAttribute("request", request)
-            .build();
+        .view("home")
+        .modelAttribute("maven", select)
+        .modelAttribute("paging", select.map(docsMaven ->
+            paging.search(request.getRow(),
+                request.getStart(),
+                docsMaven.getResponse().getNumFound(), request.getQ())))
+        .modelAttribute("request", request)
+        .build();
   }
 
   @GetMapping("/versions")
   public Rendering versions(@ModelAttribute VersionRequest request) {
     Mono<Maven<VersionDocs>> versions = this.mavenClient.versions(request.getG(), request.getA(),
-            request.getRow(), request.getStart());
+        request.getRow(), request.getStart());
     return Rendering
-            .view("version")
-            .modelAttribute("versions",
-                    versions)
-            .modelAttribute("paging", versions.map(docsMaven ->
-                    paging.versions(request.getRow(),
-                            request.getStart(),
-                            docsMaven.getResponse().getNumFound(), request.getG(), request.getA())))
-            .build();
+        .view("version")
+        .modelAttribute("versions",
+            versions)
+        .modelAttribute("paging", versions.map(docsMaven ->
+            paging.versions(request.getRow(),
+                request.getStart(),
+                docsMaven.getResponse().getNumFound(), request.getG(), request.getA())))
+        .build();
   }
 
   @GetMapping("/maven")
   public Rendering xml(@ModelAttribute VersionRequest request) {
     return Rendering
-            .view("maven")
-            .modelAttribute("maven", mavenGenerator.generator(request.getG(),
-                    request.getA(), request.getV()))
-            .build();
+        .view("maven")
+        .modelAttribute("maven", mavenGenerator.generator(request.getG(),
+            request.getA(), request.getV()))
+        .build();
   }
 }

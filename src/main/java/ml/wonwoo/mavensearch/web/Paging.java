@@ -15,17 +15,17 @@ public class Paging {
       nav += "<li><a href=\"?q=" + query + "&row=" + size + " &start=0\" class=\"pagination-link\" aria-label=\"Goto page\">1</a></li>";
       nav += HELL;
       nav += "<li><a href=\"?q=" + query + "&row=" + size + "&start=" + (start - size)
-              + "\"  class=\"pagination-link\" aria-label=\"Goto page\">" + (current - 1) + "</a></li>";
+          + "\"  class=\"pagination-link\" aria-label=\"Goto page\">" + (current - 1) + "</a></li>";
     }
     nav += "<li><a class=\"pagination-link is-current\" aria-label=\"Page\" aria-current=\"page\">" + current + "</a></li>";
     if ((current + 1) <= last) {
       nav += "<li><a href=\"?q=" + query + "&row=" + size + "&start=" + (start + size)
-              + "\" class=\"pagination-link\" aria-label=\"Goto page \">" + (current
-              + 1) + "</a></li>";
+          + "\" class=\"pagination-link\" aria-label=\"Goto page \">" + (current
+          + 1) + "</a></li>";
       nav += HELL;
       nav += "<li><a href=\"?q=" + query + "&row=" + size + "&start=" + ((last * size) - size)
-              + "\" class=\"pagination-link\" aria-label=\"Goto page \">" + last
-              + "</a></li>";
+          + "\" class=\"pagination-link\" aria-label=\"Goto page \">" + last
+          + "</a></li>";
     }
     nav += "</ul>";
     return nav;
@@ -38,20 +38,20 @@ public class Paging {
     int current = (int) Math.ceil((double) start / size) + 1;
     if (current > 1) {
       nav += "<li><a href=\"?g=" + groupId + "&a=" + artifactId + "&row=" + size
-              + " &start=0\" class=\"pagination-link\" aria-label=\"Goto page\">1</a></li>";
+          + " &start=0\" class=\"pagination-link\" aria-label=\"Goto page\">1</a></li>";
       nav += HELL;
       nav += "<li><a href=\"?g=" + groupId + "&a=" + artifactId + "&row=" + size + "&start=" + (start - size)
-              + "\"  class=\"pagination-link\" aria-label=\"Goto page\">" + (current - 1) + "</a></li>";
+          + "\"  class=\"pagination-link\" aria-label=\"Goto page\">" + (current - 1) + "</a></li>";
     }
     nav += "<li><a class=\"pagination-link is-current\" aria-label=\"Page\" aria-current=\"page\">" + current + "</a></li>";
     if ((current + 1) <= last) {
       nav += "<li><a href=\"?g=" + groupId + "&a=" + artifactId + "&row=" + size + "&start=" + (start + size)
-              + "\" class=\"pagination-link\" aria-label=\"Goto page \">" + (current
-              + 1) + "</a></li>";
+          + "\" class=\"pagination-link\" aria-label=\"Goto page \">" + (current
+          + 1) + "</a></li>";
       nav += HELL;
       nav += "<li><a href=\"?g=" + groupId + "&a=" + artifactId + "&row=" + size + "&start=" + ((last * size) - size)
-              + "\" class=\"pagination-link\" aria-label=\"Goto page \">" + last
-              + "</a></li>";
+          + "\" class=\"pagination-link\" aria-label=\"Goto page \">" + last
+          + "</a></li>";
     }
     nav += "</ul>";
     return nav;
