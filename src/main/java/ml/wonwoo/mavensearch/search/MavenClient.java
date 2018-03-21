@@ -2,6 +2,7 @@ package ml.wonwoo.mavensearch.search;
 
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import io.micrometer.core.instrument.MeterRegistry;
@@ -27,7 +28,7 @@ public class MavenClient {
   public Mono<Maven<Docs>> select(String q, int row, int start) {
     return this.webClient
         .get()
-        .uri("/solrsearch/select?q=\"{q}\"&rows={row}&wt=json&start={start}", q, row, start)
+        .uri("/solrsearch/select?q={q}&rows={row}&wt=json&start={start}", StringUtils.hasLength(q) ? q : "\"\"" , row, start)
         .retrieve()
         .bodyToMono(new ParameterizedTypeReference<Maven<Docs>>() {})
         .doFinally(signalType -> increment("maven.select"));
