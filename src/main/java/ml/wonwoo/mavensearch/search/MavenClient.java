@@ -35,6 +35,7 @@ public class MavenClient {
     return docs.getBody();
   }
 
+  //FIXME bug
   public Maven<VersionDocs> versions(String g, String a, int row, int start) {
     ResponseEntity<Maven<VersionDocs>> versionDocs = restTemplate.exchange("/solrsearch/select?q=g:{g}+AND+a:{a}&rows={row}&wt=json&start={start}&core=gav", HttpMethod.GET,
         null, new ParameterizedTypeReference<Maven<VersionDocs>>() {
