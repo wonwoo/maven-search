@@ -2,14 +2,12 @@ package ml.wonwoo.mavensearch.generator;
 
 import org.springframework.stereotype.Service;
 
-import reactor.core.publisher.Mono;
-
 @Service
 public class MavenGenerator implements Generator {
 
   @Override
-  public Mono<String> generator(String groupId, String artifactId, String version) {
-    return Mono.just("<dependency>"
+  public String generator(String groupId, String artifactId, String version) {
+    return "<dependency>"
         + "\n\t"
         + "<groupId>"
         + groupId
@@ -23,6 +21,6 @@ public class MavenGenerator implements Generator {
         + version
         + "</version>"
         + "\n"
-        + "</dependency>");
+        + "</dependency>";
   }
 }

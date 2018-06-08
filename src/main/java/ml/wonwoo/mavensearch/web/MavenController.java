@@ -1,16 +1,14 @@
 package ml.wonwoo.mavensearch.web;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.reactive.result.view.Rendering;
-
 import ml.wonwoo.mavensearch.generator.Generator;
 import ml.wonwoo.mavensearch.search.MavenClient;
 import ml.wonwoo.mavensearch.search.model.Docs;
 import ml.wonwoo.mavensearch.search.model.Maven;
 import ml.wonwoo.mavensearch.search.model.VersionDocs;
-import reactor.core.publisher.Mono;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 @Controller
 public class MavenController {
@@ -26,41 +24,30 @@ public class MavenController {
   }
 
   @GetMapping("/")
-  public Rendering search(@ModelAttribute SearchRequest request) {
-    Mono<Maven<Docs>> select = this.mavenClient.select(request.getQ(),
+  public String search(Model model, @ModelAttribute SearchRequest request) {
+    Maven<Docs> docs = this.mavenClient.select(request.getQ(),
         request.getRow(), request.getStart());
-    return Rendering
-        .view("home")
-        .modelAttribute("maven", select)
-        .modelAttribute("paging", select.map(docsMaven ->
-            paging.search(request.getRow(),
-                request.getStart(),
-                docsMaven.getResponse().getNumFound(), request.getQ())))
-        .modelAttribute("request", request)
-        .build();
+    model.addAttribute("maven", docs);
+    model.addAttribute("request", request);
+    model.addAttribute("paging",
+        paging.search(request.getRow(), request.getStart(), docs.getResponse().getNumFound(), request.getQ()));
+    return "home";
   }
 
   @GetMapping("/versions")
-  public Rendering versions(@ModelAttribute VersionRequest request) {
-    Mono<Maven<VersionDocs>> versions = this.mavenClient.versions(request.getG(), request.getA(),
+  public String versions(Model model, @ModelAttribute VersionRequest request) {
+    Maven<VersionDocs> versions = this.mavenClient.versions(request.getG(), request.getA(),
         request.getRow(), request.getStart());
-    return Rendering
-        .view("version")
-        .modelAttribute("versions",
-            versions)
-        .modelAttribute("paging", versions.map(docsMaven ->
-            paging.versions(request.getRow(),
-                request.getStart(),
-                docsMaven.getResponse().getNumFound(), request.getG(), request.getA())))
-        .build();
+    model.addAttribute("versions", versions);
+    model.addAttribute("paging",
+        paging.search(request.getRow(), request.getStart(), versions.getResponse().getNumFound(), request.getA()));
+    return "version";
   }
 
   @GetMapping("/maven")
-  public Rendering xml(@ModelAttribute VersionRequest request) {
-    return Rendering
-        .view("maven")
-        .modelAttribute("maven", mavenGenerator.generator(request.getG(),
-            request.getA(), request.getV()))
-        .build();
+  public String xml(Model model, @ModelAttribute VersionRequest request) {
+    model.addAttribute("maven", mavenGenerator.generator(request.getG(),
+        request.getA(), request.getV()));
+    return "maven";
   }
 }

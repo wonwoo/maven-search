@@ -1,11 +1,8 @@
 package ml.wonwoo.mavensearch.generator;
 
-import java.time.Duration;
-
 import org.junit.Test;
 
-import reactor.core.publisher.Mono;
-import reactor.test.StepVerifier;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class MavenGeneratorTests {
 
@@ -13,14 +10,12 @@ public class MavenGeneratorTests {
 
   @Test
   public void generatorTest() {
-    Mono<String> generator = mavenGenerator.generator("com.github.wonwoo",
+    String generator = mavenGenerator.generator("com.github.wonwoo",
             "dynamodb-spring-boot", "1.0.1-RELEASE");
-    StepVerifier.create(generator)
-            .expectNext("<dependency>\n"
-                    + "\t<groupId>com.github.wonwoo</groupId>\n"
-                    + "\t<artifactId>dynamodb-spring-boot</artifactId>\n"
-                    + "\t<version>1.0.1-RELEASE</version>\n"
-                    + "</dependency>")
-            .expectComplete().verify(Duration.ofSeconds(1));
+    assertThat(generator).isEqualTo("<dependency>\n"
+        + "\t<groupId>com.github.wonwoo</groupId>\n"
+        + "\t<artifactId>dynamodb-spring-boot</artifactId>\n"
+        + "\t<version>1.0.1-RELEASE</version>\n"
+        + "</dependency>");
   }
 }
